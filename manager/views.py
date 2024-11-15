@@ -1,5 +1,6 @@
 from rest_framework.viewsets import ModelViewSet
 from manager.models import UserProfile, Project, Workflow, Task, ProgressLog, Comment
+from manager.permissions import IsManager
 from manager.serializers import (
     UserProfileSerializer,
     ProjectSerializer,
@@ -18,6 +19,7 @@ class UserProfileViewSet(ModelViewSet):
 class ProjectViewSet(ModelViewSet):
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
+    # permission_classes = [IsManager]
 
 
 class WorkflowViewSet(ModelViewSet):
@@ -28,6 +30,12 @@ class WorkflowViewSet(ModelViewSet):
 class TaskViewSet(ModelViewSet):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
+
+    def get_queryset(self):
+        project_id = self.request.query_params.get('project')
+        if project_id:
+            return self.queryset.filter(project_id=project_id)
+        return self.queryset
 
 
 class ProgressLogViewSet(ModelViewSet):

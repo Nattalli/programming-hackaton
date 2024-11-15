@@ -12,9 +12,6 @@ const NavigationBar = () => {
           <Link to="/projects">Projects</Link>
         </li>
         <li>
-          <Link to="/tasks">Tasks</Link>
-        </li>
-        <li>
           <Link to="/workflows">Workflows</Link>
         </li>
       </ul>

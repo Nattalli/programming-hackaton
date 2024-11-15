@@ -5,7 +5,7 @@ const API = axios.create({
 });
 
 export const fetchProjects = () => API.get('/projects/');
-export const fetchTasks = () => API.get('/tasks/');
+export const fetchTasksByProject = (projectId) => API.get(`/tasks/?project=${projectId}`);
 export const fetchWorkflows = () => API.get('/workflows/');
 
 export const createProject = (data) => API.post('/projects/', data);

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { fetchProjects } from '../services/api';
+import { Link } from 'react-router-dom';
 
 const ProjectList = () => {
   const [projects, setProjects] = useState([]);
@@ -16,7 +17,8 @@ const ProjectList = () => {
       <ul>
         {projects.map((project) => (
           <li key={project.id}>
-            <strong>{project.name}</strong> - {project.status}
+            <strong>{project.name}</strong> - {project.status}{' '}
+            <Link to={`/projects/${project.id}`}>View Details</Link>
           </li>
         ))}
       </ul>
